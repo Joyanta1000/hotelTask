@@ -20,7 +20,7 @@ class RateController extends Controller
         $j = Rate::where('package_id', '=', $id)
         ->orderBy('rates', 'asc')
         ->get();
-        dd($j->first());
+        return $j->first();
     }
 
     /**
