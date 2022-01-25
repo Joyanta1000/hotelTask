@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('package_info', [RateController::class, 'index']);
+Route::get('package_info/{id}', [RateController::class, 'index']);

@@ -6,6 +6,7 @@ use App\Models\Rate;
 use App\Http\Requests\StoreRateRequest;
 use App\Http\Requests\UpdateRateRequest;
 use App\Models\Package;
+use Illuminate\Support\Facades\DB;
 
 class RateController extends Controller
 {
@@ -14,9 +15,12 @@ class RateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        dd(Package::with('rate')->first()->rate->min('rates'));
+        $j = Rate::where('package_id', '=', $id)
+        ->orderBy('rates', 'asc')
+        ->get();
+        dd($j->first());
     }
 
     /**

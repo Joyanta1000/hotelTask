@@ -26,6 +26,6 @@ class Package extends Model
 
     public function rate()
     {
-        return $this->hasMany(Rate::class, 'package_id');
+        return $this->hasOne(Rate::class, 'package_id');
     }
 }
