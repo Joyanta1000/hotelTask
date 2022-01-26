@@ -6,6 +6,7 @@ use App\Models\Rate;
 use App\Http\Requests\StoreRateRequest;
 use App\Http\Requests\UpdateRateRequest;
 use App\Models\Package;
+use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 
 class RateController extends Controller
@@ -17,10 +18,18 @@ class RateController extends Controller
      */
     public function index($id)
     {
-        $j = Rate::where('package_id', '=', $id)
-        ->orderBy('rates', 'asc')
-        ->get();
-        return $j->first();
+        // $j = Rate::where('package_id', '=', $id)
+        // ->orderBy('rates', 'asc')
+        // ->get();
+        // return $j->first();
+
+        $result = Package::with('rate', 'room')
+        ->when($id, function ($query, $id) {
+            return $query->where('room_id', $id);
+        })
+       ->first();
+
+       return $result;
     }
 
     /**

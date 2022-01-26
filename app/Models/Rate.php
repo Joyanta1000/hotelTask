@@ -21,6 +21,6 @@ class Rate extends Model
 
     public function package()
     {
-        return $this->belongsTo(Package::class, 'package_id');
+        return $this->belongsTo(Package::class, 'package_id')->ofMany('rates', 'min');
     }
 }
